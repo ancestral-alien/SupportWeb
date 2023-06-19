@@ -1,0 +1,78 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  header img {
+    width: 200px;
+  }
+  
+  section {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="email"],
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input[type="file"] {
+    margin-bottom: 15px;
+  }
+  
+  button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Estilos específicos para el tipo de ticket seleccionado */
+  #ticket-general,
+  #problemas-extension {
+    display: none;
+  }
+  
+  #tipo-ticket option {
+    font-weight: bold;
+  }
+  
+  #tipo-ticket option[value="general"]:checked ~ #ticket-general,
+  #tipo-ticket option[value="extension"]:checked ~ #problemas-extension {
+    display: block;
+  }
+
+  
+  

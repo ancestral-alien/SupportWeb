@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reportar problema de la extensión</title>
+        <link rel="stylesheet" type="text/css" href="styles3.css">
+      </head>
+<body>
+  <!-- Sección Encabezado -->
+  <header>
+    <img src="BDS_Blanco.png" alt="Logo de la empresa">
+  </header>
+
+  <!-- Sección Cuerpo de la página -->
+  <section>
+    <h1>Submit a request</h1>
+
+    <label for="tipo-ticket">Tipo de ticket:</label>
+    <select id="tipo-ticket">
+      <option value="">Seleccionar...</option>
+      <option value="general">Ticket general</option>
+      <option value="extension">Problemas con la extensión</option>
+    </select>
+
+    <!-- Campos para el Ticket general -->
+    <div id="ticket-general" style="display: none;width: 580px;">
+      <label for="email">Email:</label>
+      <input type="email" id="email"><br>
+
+      <label for="asunto">Asunto:</label>
+      <input type="text" id="asunto"><br>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion"></textarea><br>
+
+      <label for="adjuntos">Adjuntos:</label>
+      <input type="file" id="adjuntos" multiple><br>
+    </div>
+
+    <!-- Campos para Problemas con la extensión -->
+    <div id="problemas-extension" style="display: none;width: 580px;">
+      <label for="email">Email:</label>
+      <input type="email" id="email"><br>
+
+      <label for="asunto">Asunto:</label>
+      <input type="text" id="asunto"><br>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion"></textarea><br>
+
+      <label for="address">Address:</label>
+      <input type="text" id="address"><br>
+
+      <label for="url-sitio-web">URL Sitio Web involucrado:</label>
+      <input type="text" id="url-sitio-web"><br>
+
+      <label for="wallet-provider">Wallet Provider:</label>
+      <input type="text" id="wallet-provider"><br>
+
+      <label for="adjuntos">Adjuntos:</label>
+      <input type="file" id="adjuntos" multiple><br>
+    </div>
+
+    <button id="submit">Submit</button>
+  </section>
+
+  <script>
+    // Obtener referencias a los elementos
+    var tipoTicket = document.getElementById("tipo-ticket");
+    var ticketGeneral = document.getElementById("ticket-general");
+    var problemasExtension = document.getElementById("problemas-extension");
+    var submitButton = document.getElementById("submit");
+
+    // Mostrar/ocultar campos según la opción seleccionada
+    tipoTicket.addEventListener("change", function() {
+      if (tipoTicket.value === "general") {
+        ticketGeneral.style.display = "block";
+        problemasExtension.style.display = "none";
+      } else if (tipoTicket.value === "extension") {
+        ticketGeneral.style.display = "none";
+        problemasExtension.style.display = "block";
+      } else {
+        ticketGeneral.style.display = "none";
+        problemasExtension.style.display = "none";
+      }
+    });
+
+    // Acción al hacer clic en el botón Submit
+    submitButton.addEventListener("click", function() {
+      // Obtener los valores de los campos
+      var email = document.getElementById("email").value;
+      var asunto = document.getElementById("asunto").value;
+      var descripcion = document.getElementById("descripcion").value;
+      var adjuntos = document.getElementById("adjuntos").files;
+      var address = document.getElementById("address").value;
+      var urlSitioWeb = document.getElementById("url-sitio-web").value;
+      var walletProvider = document.getElementById("wallet-provider").value;
+
+
+   // Crear un objeto FormData para enviar los datos al servidor
+    var formData = new FormData();
+    formData.append('email', email);
+    formData.append('asunto', asunto);
+    formData.append('descripcion', descripcion);
+    formData.append('adjuntos', adjuntos);
+    formData.append('address', address);
+    formData.append('url-sitio-web', urlSitioWeb);
+    formData.append('wallet-provider', walletProvider);
+
+    // Realizar la petición HTTP mediante Fetch API
+  fetch('guardar.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(function(response) {
+    if (response.ok) {
+      console.log("Los datos se han guardado correctamente.");
+    } else {
+      console.log("Hubo un error al guardar los datos.");
+    }
+  })
+  .catch(function(error) {
+    console.log("Hubo un error en la petición:", error);
+  });
+
+
+      // Ejemplo de impresión en la consola del navegador
+      console.log("Email:", email);
+      console.log("Asunto:", asunto);
+      console.log("Descripción:", descripcion);
+      console.log("Adjuntos:", adjuntos);
+      console.log("Address:", address);
+      console.log("URL Sitio Web involucrado:", urlSitioWeb);
+      console.log("Wallet Provider:", walletProvider);
+    });
+  </script>
+</body>
+</html>
